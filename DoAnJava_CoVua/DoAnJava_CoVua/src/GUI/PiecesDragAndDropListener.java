@@ -113,10 +113,11 @@ public class PiecesDragAndDropListener implements MouseListener, MouseMotionList
 
     @Override
     public void mouseReleased(MouseEvent evt) {
-        int x = evt.getPoint().x - this.dragOffsetX;
-        int y = evt.getPoint().y - this.dragOffsetY;
+      
         try
         {
+              int x = evt.getPoint().x - this.dragOffsetX;
+            int y = evt.getPoint().y - this.dragOffsetY;
              if( this.playWithComputer.getDragPiece() != null){
                 
 
@@ -133,6 +134,8 @@ public class PiecesDragAndDropListener implements MouseListener, MouseMotionList
         }
        try
         {
+              int x = evt.getPoint().x - this.dragOffsetX;
+            int y = evt.getPoint().y - this.dragOffsetY;
              if( this.playWithPersonClient.getDragPiece() != null){
   
 
@@ -149,7 +152,9 @@ public class PiecesDragAndDropListener implements MouseListener, MouseMotionList
         }
        try
         {
-             if( this.playWithPersonServer.getDragPiece() != null){
+            int x = evt.getPoint().x - this.dragOffsetX;
+            int y = evt.getPoint().y - this.dragOffsetY;
+            if( this.playWithPersonServer.getDragPiece() != null){
   
 
                 // set game piece to the new location if possible
@@ -169,10 +174,11 @@ public class PiecesDragAndDropListener implements MouseListener, MouseMotionList
     //khi keo chuot
     @Override
     public void mouseDragged(MouseEvent evt) {
-        int x = evt.getPoint().x - this.dragOffsetX;
-        int y = evt.getPoint().y - this.dragOffsetY;
+       
         try
         {
+            int x = evt.getPoint().x - this.dragOffsetX;
+            int y = evt.getPoint().y - this.dragOffsetY;
             if(this.playWithComputer.getDragPiece() != null){
             
 
@@ -188,6 +194,8 @@ public class PiecesDragAndDropListener implements MouseListener, MouseMotionList
        
         try
         {
+            int x = evt.getPoint().x - this.dragOffsetX;
+            int y = evt.getPoint().y - this.dragOffsetY;
             if(this.playWithPersonClient.getDragPiece() != null){
 
                 //tien hanh set lai x,y cho hinh anh
@@ -201,6 +209,8 @@ public class PiecesDragAndDropListener implements MouseListener, MouseMotionList
         catch(Exception e) { }
          try
         {
+            int x = evt.getPoint().x - this.dragOffsetX;
+            int y = evt.getPoint().y - this.dragOffsetY;
             if(this.playWithPersonServer.getDragPiece() != null){
 
                 //tien hanh set lai x,y cho hinh anh

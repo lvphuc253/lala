@@ -78,7 +78,7 @@ public class ChessGame implements Runnable{
     public void startGame(){
        if(this.blackPlayerHandler != null && this.whitePlayerHandler != null){
            // bên trắng đi trước
-           this.activePlayerHandler = this.whitePlayerHandler;
+           this.activePlayerHandler = this.blackPlayerHandler;
            // start game flow
            System.out.println("ChessGame: starting game flow");
            while(!isGameEndConditionReached()){
@@ -142,7 +142,7 @@ public class ChessGame implements Runnable{
                 Piece.getRowString(move.targetRow)+Piece.getColumnString(move.targetColumn);
         }
         if(num==2){
-           DefaultTableModel model = (DefaultTableModel) PlayWithComputer.jTableTemp.getModel();
+            DefaultTableModel model = (DefaultTableModel) PlayWithComputer.jTableTemp.getModel();
             model.addRow(new Object[]{str1,str2}); 
             str1 = ""; str2 = ""; num = 0;
         }

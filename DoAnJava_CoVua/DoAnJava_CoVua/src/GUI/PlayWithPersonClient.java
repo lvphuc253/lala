@@ -185,13 +185,14 @@ public class PlayWithPersonClient extends javax.swing.JPanel implements IPlayerH
 //           
 //        }
     }
-    private boolean isUserDraggingPiece() {
+     private boolean isUserDraggingPiece() {
         return this.dragPiece != null;
     }
     public int getGameState() {
         return this.chessGame.getGameState();
    }
    
+  
    //X = vị trí X bắt đầu bàn cờ + độ rộng ô cờ * số cột
    public static int convertColumnToX(int column){
         return PIECES_START_X + SQUARE_WIDTH * column;
@@ -210,17 +211,55 @@ public class PlayWithPersonClient extends javax.swing.JPanel implements IPlayerH
         return Piece.ROW_8 - (y - DRAG_TARGET_SQUARE_START_Y)/SQUARE_HEIGHT;
    }
     
-    //Hàm set vị trí mới cho Piece
+     //Hàm set vị trí mới cho Piece
    public void setNewPieceLocation(GuiPiece dragPiece, int x, int y) {
         int targetRow = convertYToRow(y);
         int targetColumn = convertXToColumn(x);
 
         Move move = new Move(dragPiece.getPiece().getRow(), dragPiece.getPiece().getColumn()
                         , targetRow, targetColumn);
-        //Nếu vị trí đích hợp lệ thì tiến hành di chuyển
+        //Nếu vị trí đích hợp lệ thì tiến hành di chuyển`
         if( this.chessGame.getMoveValidator().isMoveValid(move, true) ){
                 this.currentMove = move;
-                guiNuocDi("nước đi của client");
+                if(dragPiece.getPiece().getLocation() == 0 || dragPiece.getPiece().getLocation() == 8)
+                {
+                    guiNuocDi(String.valueOf(dragPiece.getPiece().getLocation() + 23));  
+                    guiNuocDi(String.valueOf(dragPiece.getPiece().getRow()));
+                    guiNuocDi(String.valueOf(dragPiece.getPiece().getColumn()));
+                    guiNuocDi(String.valueOf(7 - targetColumn));
+                    guiNuocDi(String.valueOf(7 - targetRow));
+                    
+                }
+                if(dragPiece.getPiece().getLocation() == 1 || dragPiece.getPiece().getLocation() == 9)
+                {
+                    guiNuocDi(String.valueOf(dragPiece.getPiece().getLocation() + 21));
+                }
+                if(dragPiece.getPiece().getLocation() == 2 || dragPiece.getPiece().getLocation() == 10)
+                {
+                    guiNuocDi(String.valueOf(dragPiece.getPiece().getLocation() + 19));
+                }
+                if(dragPiece.getPiece().getLocation() == 3 || dragPiece.getPiece().getLocation() == 11)
+                {
+                    guiNuocDi(String.valueOf(dragPiece.getPiece().getLocation() + 17));
+                }
+                if(dragPiece.getPiece().getLocation() == 4 || dragPiece.getPiece().getLocation() == 12)
+                {
+                    guiNuocDi(String.valueOf(dragPiece.getPiece().getLocation() + 15));
+                }
+                if(dragPiece.getPiece().getLocation() == 5 || dragPiece.getPiece().getLocation() == 13)
+                {
+                    guiNuocDi(String.valueOf(dragPiece.getPiece().getLocation() + 13));
+                }
+                if(dragPiece.getPiece().getLocation() == 6 || dragPiece.getPiece().getLocation() == 14)
+                {
+                    guiNuocDi(String.valueOf(dragPiece.getPiece().getLocation() + 11));
+                }
+                if(dragPiece.getPiece().getLocation() == 7 || dragPiece.getPiece().getLocation() == 15)
+                {
+                    guiNuocDi(String.valueOf(dragPiece.getPiece().getLocation() + 9));
+                }
+                
+                
                 
         }else{// ngược lại đưa trở về vị trí cũ
                 dragPiece.resetToUnderlyingPiecePosition();
@@ -538,6 +577,7 @@ public class PlayWithPersonClient extends javax.swing.JPanel implements IPlayerH
     private void guiNuocDi(String mess)
     {
         try {
+            
             os.writeUTF(mess);
             os.flush();
             taChat.append("[Sended] : " + mess + "\n");

@@ -182,9 +182,10 @@ public class dialogKetNoi extends javax.swing.JDialog {
                 PlayWithPersonClient.userClient = txtUser.getText();
                 PlayWithPersonClient chessGui = new PlayWithPersonClient(chessGame);
                 
+                chessGame.setPlayer(Piece.COLOR_WHITE, chessGui);
                 chessGame.setPlayer(Piece.COLOR_BLACK, chessGui);
                 //chessGame.setPlayer(Piece.COLOR_BLACK, ai1);
-                chessGame.setPlayer(Piece.COLOR_WHITE, chessGui);
+                
                 // in the end we start the game
                 new Thread(chessGame).start();
 

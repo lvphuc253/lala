@@ -159,7 +159,9 @@ public class MoveValidator {
                         }
                     }
 
-                }else{
+                }
+                else
+                {
                     if(sourceRow==6){
                         if( sourceRow-1 == targetRow ){
                             // move one up
