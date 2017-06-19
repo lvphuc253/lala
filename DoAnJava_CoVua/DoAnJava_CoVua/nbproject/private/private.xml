@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/ProjectsJava/Do_an_co_vua/JA-V-A/JChess/JChess/DoAnJava_CoVua/src/logic/Move.java</file>
+            <file>file:/D:/ProjectsJava/Do_an_co_vua/JA-V-A/JChess/JChess/DoAnJava_CoVua/src/logic/IPlayerHandler.java</file>
+            <file>file:/D:/ProjectsJava/Do_an_co_vua/JA-V-A/JChess/JChess/DoAnJava_CoVua/src/logic/ChessGame.java</file>
+            <file>file:/D:/ProjectsJava/Do_an_co_vua/JA-V-A/JChess/JChess/DoAnJava_CoVua/src/GUI/GuiPiece.java</file>
+            <file>file:/D:/ProjectsJava/Do_an_co_vua/JA-V-A/JChess/JChess/DoAnJava_CoVua/src/logic/MoveValidator.java</file>
+            <file>file:/D:/ProjectsJava/Do_an_co_vua/JA-V-A/JChess/JChess/DoAnJava_CoVua/src/aiplayer/SimpleAiPlayerHandler.java</file>
+            <file>file:/D:/ProjectsJava/Do_an_co_vua/JA-V-A/JChess/JChess/DoAnJava_CoVua/src/GUI/PiecesDragAndDropListener.java</file>
+            <file>file:/D:/ProjectsJava/Do_an_co_vua/JA-V-A/JChess/JChess/DoAnJava_CoVua/src/GUI/PlayWithComputer.java</file>
+            <file>file:/D:/ProjectsJava/Do_an_co_vua/JA-V-A/JChess/JChess/DoAnJava_CoVua/src/GUI/MainChess.java</file>
+            <file>file:/D:/ProjectsJava/Do_an_co_vua/JA-V-A/JChess/JChess/DoAnJava_CoVua/src/logic/Piece.java</file>
+        </group>
+    </open-files>
+</project-private>
