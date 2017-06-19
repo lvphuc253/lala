@@ -129,6 +129,7 @@ public class ChessGame implements Runnable{
             }
         }while(move == null);
 
+
         Piece temp1=this.getNonCapturedPieceAtLocation(move.sourceRow, move.sourceColumn);   
         Piece temp2 = new Piece(temp1.getColor(), temp1.getType(), temp1.getRow(), temp1.getColumn(), temp1.getLocation(), 1);
         this.piece_oldMove.add(temp2);
