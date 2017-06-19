@@ -141,7 +141,8 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
         return new ImageIcon(urlPieceImg).getImage();
     }
     
-    
+    int xw = 700,xb=700;
+    int yw = 69,yb=597;
     @Override
     protected void paintComponent(Graphics g) {
          // draw background
@@ -153,7 +154,29 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
                     g.drawImage(guiPiece.getImage(), guiPiece.getX(), guiPiece.getY(), null);
             }
         }
-
+        for(int i=0;i<this.chessGame.capturedPieces.size();i++){
+            Image img = this.getImageForPiece(chessGame.capturedPieces.get(i).getColor(), chessGame.capturedPieces.get(i).getType());
+            GuiPiece guiPiece = new GuiPiece(img, chessGame.capturedPieces.get(i));
+            if(chessGame.capturedPieces.get(i).getColor()==Piece.COLOR_WHITE){
+                //g.drawImage(guiPiece.getImage(), xw, yw, null);
+                g.drawImage(guiPiece.getImage(), xw, yw, guiPiece.getImage().getWidth(null)*3/4, guiPiece.getImage().getHeight(null)*3/4, null);
+                yw+=52;
+                if(yw==277){//69+52*4
+                    yw=69;
+                    xw+=52;
+                }
+            }else{
+                 g.drawImage(guiPiece.getImage(), xb, yb, guiPiece.getImage().getWidth(null)*3/4, guiPiece.getImage().getHeight(null)*3/4, null);
+                yb-=52;//69*0.75
+                if(yb==389){//597-52*4
+                    yb=597;
+                    xb+=52;
+                }
+            }
+            
+        }
+        xw=700;xb=700;
+        yw = 69;yb=597;
         // Vẽ vị trí mục tiêu hợp lệ, nếu người dùng đang kéo một đoạn trò chơi
         if( isUserDraggingPiece() ){
 
@@ -390,46 +413,51 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
     }//GEN-LAST:event_btn_troveActionPerformed
 
     private void btn_dilaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dilaiActionPerformed
-         if(this.chessGame.getGameState()==ChessGame.GAME_STATE_END_BLACK_WON ||
+        
+        try {
+             if(this.chessGame.getGameState()==ChessGame.GAME_STATE_END_BLACK_WON ||
                  this.chessGame.getGameState()==ChessGame.GAME_STATE_END_WHITE_WON)
              return;
-        int j=0;
-        for(int i=this.chessGame.piece_oldMove.size()-1;i>=0;i--){
-            
-            int location = chessGame.piece_oldMove.get(i).getLocation();
-            int column = chessGame.piece_oldMove.get(i).getColumn();
-            int row = chessGame.piece_oldMove.get(i).getRow();
-            
-            GuiPiece guiPiece = guiPieces.get(location);
-            
-            if(guiPiece.getPiece().isCaptured()==true){
-                guiPiece.getPiece().isCaptured(false);
-                Piece capPiece = null;
-                for (Piece piece : chessGame.capturedPieces){
-                    if(piece.getLocation()==location){
-                        capPiece=piece;
-                        j--;
-                        break;
+            int j=0;
+            for(int i=this.chessGame.piece_oldMove.size()-1;i>=0;i--){
+
+                int location = chessGame.piece_oldMove.get(i).getLocation();
+                int column = chessGame.piece_oldMove.get(i).getColumn();
+                int row = chessGame.piece_oldMove.get(i).getRow();
+
+                GuiPiece guiPiece = guiPieces.get(location);
+
+                if(guiPiece.getPiece().isCaptured()==true){
+                    guiPiece.getPiece().isCaptured(false);
+                    Piece capPiece = null;
+                    for (Piece piece : chessGame.capturedPieces){
+                        if(piece.getLocation()==location){
+                            capPiece=piece;
+                            j--;
+                            break;
+                        }
                     }
+                    chessGame.capturedPieces.remove(capPiece);
+                    chessGame.pieces.add(capPiece);
+                    chessGame.capSize--;
                 }
-                chessGame.capturedPieces.remove(capPiece);
-                chessGame.pieces.add(capPiece);
-                chessGame.capSize--;
+
+                guiPiece.setX(convertColumnToX(column));
+                guiPiece.setY(convertRowToY(row));
+                guiPiece.getPiece().setColumn(column);
+                guiPiece.getPiece().setRow(row);
+                this.chessGame.piece_oldMove.remove(i);
+                j++;
+                if(j==2){
+                    j=0;
+                    DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+                    model.removeRow(model.getRowCount()-1);
+                    repaint();
+                    break;
+                }
+
             }
-            
-            guiPiece.setX(convertColumnToX(column));
-            guiPiece.setY(convertRowToY(row));
-            guiPiece.getPiece().setColumn(column);
-            guiPiece.getPiece().setRow(row);
-            this.chessGame.piece_oldMove.remove(i);
-            j++;
-            if(j==2){
-                j=0;
-                break;
-            }
-            DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
-            model.removeRow(model.getRowCount()-1);
-            repaint();
+        } catch (Exception e) {
         }
 
     }//GEN-LAST:event_btn_dilaiActionPerformed

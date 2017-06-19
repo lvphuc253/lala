@@ -109,7 +109,7 @@ public class MainChess extends javax.swing.JFrame {
         ai1.maxDepth = 1;
         ai2.maxDepth = 2;
 
-        chessGame.setPlayer(Piece.COLOR_BLACK, chessGui);
+        chessGame.setPlayer(Piece.COLOR_BLACK, ai2);
         //chessGame.setPlayer(Piece.COLOR_BLACK, ai1);
         chessGame.setPlayer(Piece.COLOR_WHITE, chessGui);
 
