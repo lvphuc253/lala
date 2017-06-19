@@ -98,7 +98,7 @@ public class MainChess extends javax.swing.JFrame {
     private void btn_mayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mayActionPerformed
         // TODO add your handling code here:
         dispose();
-        ChessGame chessGame = new ChessGame();
+        ChessGame chessGame = new ChessGame(0);
         // then we create the clients/playersPlayW
         PlayWithComputer chessGui = new PlayWithComputer(chessGame);
         //ChessConsole chessConsole = new ChessConsole(chessGame);

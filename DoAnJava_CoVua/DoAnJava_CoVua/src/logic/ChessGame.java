@@ -23,11 +23,11 @@ public class ChessGame implements Runnable{
     private IPlayerHandler blackPlayerHandler;
     private IPlayerHandler whitePlayerHandler;
     private IPlayerHandler activePlayerHandler;
-
+    private int type;
     /**
      * initialize game
      */
-    public ChessGame() {
+    public ChessGame(int type) {
 
         // rook, knight, bishop, queen, king, bishop, knight, and rook
         createAndAddPiece(Piece.COLOR_WHITE, Piece.TYPE_ROOK, Piece.ROW_1, Piece.COLUMN_A,0,1);
@@ -73,6 +73,7 @@ public class ChessGame implements Runnable{
         }
         
         this.moveValidator = new MoveValidator(this);
+        this.type = type;
     }
 
     public void startGame(){
@@ -127,26 +128,30 @@ public class ChessGame implements Runnable{
                 System.exit(0);
             }
         }while(move == null);
-        Piece temp1=this.getNonCapturedPieceAtLocation(move.sourceRow, move.sourceColumn);   
-        Piece temp2 = new Piece(temp1.getColor(), temp1.getType(), temp1.getRow(), temp1.getColumn(), temp1.getLocation(), 1);
-        this.piece_oldMove.add(temp2);
-        if(num==2){
-            //định dạng Type:Row-Column
-            str2 = Piece.getTypeString(temp2.getType())+":"+
-                Piece.getRowString(move.sourceRow)+Piece.getColumnString(move.sourceColumn)+"-"+
-                Piece.getRowString(move.targetRow)+Piece.getColumnString(move.targetColumn);
+      
+        if(type == 0){//danh voi computer
+            Piece temp1=this.getNonCapturedPieceAtLocation(move.sourceRow, move.sourceColumn);   
+            Piece temp2 = new Piece(temp1.getColor(), temp1.getType(), temp1.getRow(), temp1.getColumn(), temp1.getLocation(), 1);
+            this.piece_oldMove.add(temp2);
+            if(num==2){
+                //định dạng Type:Row-Column
+                str2 = Piece.getTypeString(temp2.getType())+":"+
+                    Piece.getRowString(move.sourceRow)+Piece.getColumnString(move.sourceColumn)+"-"+
+                    Piece.getRowString(move.targetRow)+Piece.getColumnString(move.targetColumn);
+            }
+            if(num==1){
+                str1 = Piece.getTypeString(temp2.getType())+":"+ 
+                    Piece.getRowString(move.sourceRow)+Piece.getColumnString(move.sourceColumn)+"-"+
+                    Piece.getRowString(move.targetRow)+Piece.getColumnString(move.targetColumn);
+            }
+            if(num==2){
+               DefaultTableModel model = (DefaultTableModel) PlayWithComputer.jTableTemp.getModel();
+                model.addRow(new Object[]{str1,str2}); 
+                str1 = ""; str2 = ""; num = 0;
+            }
+            num++;
         }
-        if(num==1){
-            str1 = Piece.getTypeString(temp2.getType())+":"+ 
-                Piece.getRowString(move.sourceRow)+Piece.getColumnString(move.sourceColumn)+"-"+
-                Piece.getRowString(move.targetRow)+Piece.getColumnString(move.targetColumn);
-        }
-        if(num==2){
-           DefaultTableModel model = (DefaultTableModel) PlayWithComputer.jTableTemp.getModel();
-            model.addRow(new Object[]{str1,str2}); 
-            str1 = ""; str2 = ""; num = 0;
-        }
-        num++;
+        
         //execute move
         boolean success = this.movePiece(move);
             
@@ -154,17 +159,14 @@ public class ChessGame implements Runnable{
             this.blackPlayerHandler.moveSuccessfullyExecuted(move);
             this.whitePlayerHandler.moveSuccessfullyExecuted(move);
         }
-        if(capSize<capturedPieces.size()){
-            capSize=capturedPieces.size();
-            Piece temp3= capturedPieces.get(capSize-1);
-            Piece temp4 = new Piece(temp3.getColor(), temp3.getType(), temp3.getRow(), temp3.getColumn(), temp3.getLocation(), 0);
-            piece_oldMove.add(temp4);
+        if(type == 0){
+            if(capSize<capturedPieces.size()){
+                capSize=capturedPieces.size();
+                Piece temp3= capturedPieces.get(capSize-1);
+                Piece temp4 = new Piece(temp3.getColor(), temp3.getType(), temp3.getRow(), temp3.getColumn(), temp3.getLocation(), 0);
+                piece_oldMove.add(temp4);
+            }
         }
-//        System.out.println("*************************");
-//        for(int i=0;i<piece_oldMove.size();i++){
-//            System.out.println(piece_oldMove.get(i));
-//        }
-//        System.out.println("*************************");
     }
 
     public void createAndAddPiece(int color, int type, int row, int column, int location, int exists) {

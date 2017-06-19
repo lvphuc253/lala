@@ -160,7 +160,7 @@ public class dialogKetNoi extends javax.swing.JDialog {
 
     private void btn_batdauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batdauActionPerformed
         dispose();
-        ChessGame chessGame = new ChessGame();
+        ChessGame chessGame = new ChessGame(1);
         if(jRadioButton1.isSelected() == true)
         {
              
@@ -182,9 +182,10 @@ public class dialogKetNoi extends javax.swing.JDialog {
                 PlayWithPersonClient.userClient = txtUser.getText();
                 PlayWithPersonClient chessGui = new PlayWithPersonClient(chessGame);
                 
+                chessGame.setPlayer(Piece.COLOR_WHITE, chessGui);
                 chessGame.setPlayer(Piece.COLOR_BLACK, chessGui);
                 //chessGame.setPlayer(Piece.COLOR_BLACK, ai1);
-                chessGame.setPlayer(Piece.COLOR_WHITE, chessGui);
+                
                 // in the end we start the game
                 new Thread(chessGame).start();
 

@@ -62,7 +62,7 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
         initComponents();
 
         jTableTemp = jTable1;
-        ///jLabel1.setVisible(false);
+        jLabel1.setVisible(false);
         URL urlBackgroundImg = getClass().getResource("/imgs/ChessBoard02.png");
 
   
@@ -89,19 +89,6 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
         f.setLocationRelativeTo(null);
         f.setVisible(true);
     }
-
-
-//    private String getGameStateAsText() {
-//        String state = "unknown";
-//        switch (this.chessGame.getGameState()) {
-//            case ChessGame.GAME_STATE_BLACK: state = "black";break;
-//            case ChessGame.GAME_STATE_END_WHITE_WON: state = "white won";break;
-//            case ChessGame.GAME_STATE_END_BLACK_WON: state = "black won";break;
-//            case ChessGame.GAME_STATE_WHITE: state = "white";break;
-//        }
-//        return state;
-//    }
-
 
     private void createAndAddGuiPiece(Piece piece) {
         Image img = this.getImageForPiece(piece.getColor(), piece.getType());
@@ -208,11 +195,11 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
 
         if(this.chessGame.getGameState()==ChessGame.GAME_STATE_END_BLACK_WON){
             this.jLabel1.setText("YOU LOSE");
-            //this.jLabel1.setVisible(true);
+            this.jLabel1.setVisible(true);
         }
         if(this.chessGame.getGameState()==ChessGame.GAME_STATE_END_WHITE_WON){
             this.jLabel1.setText("YOU WIN");
-            //this.jLabel1.setVisible(true);
+            this.jLabel1.setVisible(true);
         }
         
     }
@@ -310,7 +297,7 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
         });
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setText("YOU WON");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -383,7 +370,7 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
         int dialogResult = JOptionPane.showConfirmDialog(this, "Bạn muốn tạo ván mới?", "Thông báo", JOptionPane.YES_NO_OPTION);
         if(dialogResult == 0) {
             f.dispose();
-            ChessGame chessGame = new ChessGame();
+            ChessGame chessGame = new ChessGame(0);
 
             PlayWithComputer chessGui = new PlayWithComputer(chessGame);
             SimpleAiPlayerHandler ai1 = new SimpleAiPlayerHandler(chessGame);
