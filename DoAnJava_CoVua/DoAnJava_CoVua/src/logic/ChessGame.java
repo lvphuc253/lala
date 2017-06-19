@@ -79,7 +79,7 @@ public class ChessGame implements Runnable{
     public void startGame(){
        if(this.blackPlayerHandler != null && this.whitePlayerHandler != null){
            // bên trắng đi trước
-           this.activePlayerHandler = this.blackPlayerHandler;
+           this.activePlayerHandler = this.whitePlayerHandler;
            // start game flow
            System.out.println("ChessGame: starting game flow");
            while(!isGameEndConditionReached()){
@@ -129,25 +129,27 @@ public class ChessGame implements Runnable{
             }
         }while(move == null);
 
-
-        Piece temp1=this.getNonCapturedPieceAtLocation(move.sourceRow, move.sourceColumn);   
-        Piece temp2 = new Piece(temp1.getColor(), temp1.getType(), temp1.getRow(), temp1.getColumn(), temp1.getLocation(), 1);
-        this.piece_oldMove.add(temp2);
-        if(num==2){
-            //định dạng Type:Row-Column
-            str2 = Piece.getTypeString(temp2.getType())+":"+
-                Piece.getRowString(move.sourceRow)+Piece.getColumnString(move.sourceColumn)+"-"+
-                Piece.getRowString(move.targetRow)+Piece.getColumnString(move.targetColumn);
-        }
-        if(num==1){
-            str1 = Piece.getTypeString(temp2.getType())+":"+ 
-                Piece.getRowString(move.sourceRow)+Piece.getColumnString(move.sourceColumn)+"-"+
-                Piece.getRowString(move.targetRow)+Piece.getColumnString(move.targetColumn);
-        }
-        if(num==2){
-            DefaultTableModel model = (DefaultTableModel) PlayWithComputer.jTableTemp.getModel();
-            model.addRow(new Object[]{str1,str2}); 
-            str1 = ""; str2 = ""; num = 0;
+        if(type == 0){
+            Piece temp1=this.getNonCapturedPieceAtLocation(move.sourceRow, move.sourceColumn);   
+            Piece temp2 = new Piece(temp1.getColor(), temp1.getType(), temp1.getRow(), temp1.getColumn(), temp1.getLocation(), 1);
+            this.piece_oldMove.add(temp2);
+            if(num==2){
+                //định dạng Type:Row-Column
+                str2 = Piece.getTypeString(temp2.getType())+":"+
+                    Piece.getRowString(move.sourceRow)+Piece.getColumnString(move.sourceColumn)+"-"+
+                    Piece.getRowString(move.targetRow)+Piece.getColumnString(move.targetColumn);
+            }
+            if(num==1){
+                str1 = Piece.getTypeString(temp2.getType())+":"+ 
+                    Piece.getRowString(move.sourceRow)+Piece.getColumnString(move.sourceColumn)+"-"+
+                    Piece.getRowString(move.targetRow)+Piece.getColumnString(move.targetColumn);
+            }
+            if(num==2){
+                DefaultTableModel model = (DefaultTableModel) PlayWithComputer.jTableTemp.getModel();
+                model.addRow(new Object[]{str1,str2}); 
+                str1 = ""; str2 = ""; num = 0;
+            }
+            num++;
         }
         
         //execute move
